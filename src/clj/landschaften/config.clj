@@ -5,8 +5,9 @@
 
 
 (defstate env
-  :start
-  (load-config
+  :start 
+{:database-url "mysql://root:mysql123@127.0.0.1:3306/landschaften"}
+  #_(load-config
     :merge
     [(args)
      (source/from-system-props)

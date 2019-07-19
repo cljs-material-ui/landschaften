@@ -16,7 +16,7 @@
                  [metosin/reitit "0.1.2"]
                  [metosin/ring-http-response "0.9.0"]
                  [mount "0.1.12"]
-                 [mysql/mysql-connector-java "6.0.5"]
+                 [mysql/mysql-connector-java "8.0.15"]
                  [org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.339" :scope "provided"]
                  [org.clojure/tools.cli "0.3.7"]
