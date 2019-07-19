@@ -6,7 +6,9 @@
 
 (defstate env
   :start 
-{:database-url "mysql://root:mysql123@127.0.0.1:3306/landschaften"}
+{:database-url "mysql://root:mysql123@127.0.0.1:3306/landschaften"
+:options {:port 3000}
+}
   #_(load-config
     :merge
     [(args)

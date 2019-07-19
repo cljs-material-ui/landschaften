@@ -1,5 +1,11 @@
 # landschaften: visual explorer for paintings and their concepts
  
+```bash
+lein run
+lein cljsbuild auto
+
+```
+
 > "Seht nur das Wölkchen, wie es spielt ..."
 >
 > - Goethe, Landschaft 
