@@ -1,0 +1,129 @@
+坚持去λ化(eshell) landschaften  master $ mysql -uroot -pmysql123
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.12 Homebrew
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE landschaften;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> source ./resources/migrations/201807012152-add-wga-csv-rows-table.up.sql;
+mysql> ERROR 1046 (3D000): No database selected
+
+mysql> use landschaften;
+Database changed
+mysql> source ./resources/migrations/201807012152-add-wga-csv-rows-table.up.sql;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> source ./resources/migrations/201807012153-add-paintings-table.up.sql;
+mysql> ERROR 1826 (HY000): Duplicate foreign key constraint name 'fk_cat'
+
+mysql> source ./resources/migrations/201807012153-add-paintings-table.up.sql;
+mysql> ERROR 1826 (HY000): Duplicate foreign key constraint name 'fk_cat'
+
+mysql> source ./resources/migrations/201812162153-add-paintings-concepts-table.up.sql;
+mysql> ERROR 1824 (HY000): Failed to open the referenced table 'paintings'
+
+mysql> source ./resources/migrations/201901012153-update-paintings-jpg-columns.up.sql;
+mysql> ERROR 1146 (42S02): Table 'landschaften.paintings' doesn't exist
+ERROR 1146 (42S02): Table 'landschaften.paintings' doesn't exist
+
+mysql> source ERROR 1824 (HY000): Failed to open the referenced table 'paintings'.sql;
+
+mysql> source ./resources/migrations/201812162153-add-paintings-concepts-table.up.sql;ERROR 1824 (HY000): Failed to open the referenced table 'paintings'
+
+mysql> source ./resources/migrations/201901012153-update-paintings-jpg-columns.up.sql;
+mysql> ERROR 1146 (42S02): Table 'landschaften.paintings' doesn't exist
+ERROR 1146 (42S02): Table 'landschaften.paintings' doesn't exist
+
+mysql> ALTER TABLE `paintings` CHANGE `jpg` `wga_jpg` VARCHAR(600);
+mysql> ERROR 1146 (42S02): Table 'landschaften.paintings' doesn't exist
+
+mysql> source ./resources/migrations/201807012153-add-paintings-table.up.sql;
+mysql> ERROR 1826 (HY000): Duplicate foreign key constraint name 'fk_cat'
+
+mysql> source  ./resources/migrations/201807012152-add-wga-csv-rows-table.up.sql;
+mysql> ERROR 1050 (42S01): Table 'wga_csv_rows' already exists
+
+mysql> CREATE TABLE paintings
+    -> (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->  `author` VARCHAR(600),
+    -> `title` varchar(600) NOT NULL,
+    -> `date` varchar(600) NOT NULL,
+    -> `form` varchar(128) NOT NULL,
+    -> `type` varchar(128) NOT NULL,
+    -> `school` varchar(128) NOT NULL,
+    -> `timeframe` varchar(600) NOT NULL,
+    -> `jpg` varchar(600) NOT NULL UNIQUE,
+    -> `concepts` text NOT NULL,
+    -> `created_on` timestamp DEFAULT CURRENT_TIMESTAMP,
+    -> FOREIGN KEY fk_cat(`id`) REFERENCES wga_csv_rows(`id`),
+    -> FOREIGN KEY fk_cat(`jpg`) REFERENCES wga_csv_rows(`jpg`));
+mysql> ERROR 1826 (HY000): Duplicate foreign key constraint name 'fk_cat'
+
+mysql> source ./resources/migrations/201807012152-add-wga-csv-rows-table.up.sql;ERROR 1050 (42S01): Table 'wga_csv_rows' already exists
+
+mysql> CREATE TABLE paintings
+    -> (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->  `author` VARCHAR(600),
+    -> `title` varchar(600) NOT NULL,
+    -> `date` varchar(600) NOT NULL,
+    -> `form` varchar(128) NOT NULL,
+    -> `type` varchar(128) NOT NULL,
+    -> `school` varchar(128) NOT NULL,
+    -> `timeframe` varchar(600) NOT NULL,
+    -> `jpg` varchar(600) NOT NULL UNIQUE,
+    -> `concepts` text NOT NULL,
+    -> `created_on` timestamp DEFAULT CURRENT_TIMESTAMP;
+mysql> ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 12
+
+mysql> CREATE TABLE paintings
+    -> (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->  `author` VARCHAR(600),
+    -> `title` varchar(600) NOT NULL,
+    -> `date` varchar(600) NOT NULL,
+    -> `form` varchar(128) NOT NULL,
+    -> `type` varchar(128) NOT NULL,
+    -> `school` varchar(128) NOT NULL,
+    -> `timeframe` varchar(600) NOT NULL,
+    -> `jpg` varchar(600) NOT NULL UNIQUE,
+    -> `concepts` text NOT NULL,
+    -> `created_on` timestamp DEFAULT CURRENT_TIMESTAMP);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> source  ERROR 1050 (42S01): Table 'wga_csv_rows' already existsble.up.sql
+
+mysql> source ./resources/migrations/201807012153-add-paintings-table.up.sql;
+mysql> ERROR 1050 (42S01): Table 'paintings' already exists
+
+mysql> source ./resources/migrations/201812162153-add-paintings-concepts-table.up.sql;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> source ./resources/migrations/201901012153-update-paintings-jpg-columns.up.sql;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> \
+mysql>
+mysql> 1
+    -> ;
+mysql> ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' at line 1
+
+mysql>
+mysql> ERROR 1396 (HY000): Operation ALTER USER failed for 'yourusername'@'localhost'
+ALTER USER 'yourusername'@'localhost' IDENTIFIED WITH mysql_native_password BY 'youpassword';
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mysql123';
+Query OK, 0 rows affected (0.17 sec)
+
+mysql>
