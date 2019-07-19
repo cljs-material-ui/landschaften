@@ -32,7 +32,7 @@
 
 (>defn paintings-found [n]
   [int? => string?]
-  (clojure.string/join " " [n (if (= n 1) "PAINTING" "PAINTINGS") "FOUND"]))
+  (clojure.string/join " " [n (if (= n 1) "PAINTING" "PAINTINGS") "找到了"]))
 
 
 (>defn paintings-grid [current-painting paintings show-max? n-columns]
